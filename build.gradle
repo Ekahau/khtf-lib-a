@@ -35,6 +35,7 @@ repositories {
     mavenCentral()
     maven { url "https://dl.bintray.com/kotlin/kotlin-dev" }
     maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
+    maven { url findProperty('khtfmavenrepo')?:"" }
 }
 
 kotlin {
@@ -126,7 +127,7 @@ jvmTest {
 === publish jar to nexus ===
  */
 // default values, override them in USER\.gradle\gradle.properties with your credentials
-def mavenRepo = System.getenv('khtfmavenrepo')
+def mavenRepo = findProperty('khtfmavenrepo')
 publishing {
     publications {
         jvm {
@@ -150,8 +151,8 @@ publishing {
         maven {
             url "${mavenRepo}/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }"
             credentials {
-                username System.getenv('khtfmavenuser')
-                password System.getenv('khtfmavenpassword')
+                username findProperty('khtfmavenuser')
+                password findProperty('khtfmavenpassword')
             }
         }
     }
