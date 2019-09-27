@@ -1,5 +1,5 @@
 
 enableFeaturePreview('GRADLE_METADATA')
 
-rootProject.name = 'khtf-liba'
+rootProject.name = 'khtf-lib-a'
 

@@ -126,11 +126,11 @@ jvmTest {
 === publish jar to nexus ===
  */
 // default values, override them in USER\.gradle\gradle.properties with your credentials
-def bintrayRepo = "http://bintray/something/fixme/content/repositories" //fixme
+def mavenRepo = System.getenv('khtfmavenrepo')
 publishing {
     publications {
         jvm {
-            artifactId "khtf-liba-jvm"
+            artifactId "${rootProject.name}-jvm"
         }
         metadata {
 
@@ -148,10 +148,10 @@ publishing {
 
     repositories {
         maven {
-            url "${bintrayRepo}/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }"
+            url "${mavenRepo}/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }"
             credentials {
-                username ekahauUser
-                password ekahauPassword
+                username System.getenv('khtfmavenuser')
+                password System.getenv('khtfmavenpassword')
             }
         }
     }
